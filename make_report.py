@@ -2,6 +2,7 @@ import pandas as pd
 import datetime
 import utils
 import analysis
+from emailer import Emailer
 
 if __name__ == "__main__":
     print("Starting program")
@@ -13,7 +14,11 @@ if __name__ == "__main__":
     last_month = utils.last_month_list(df)
 
     analysis = analysis.Analysis(df)
-    analysis.make_graph()
+    #analysis.make_graph()
+
+    mail = Emailer()
+    mail.create_email()
+    mail.send_email()
 
 
     print("Report has been created and sent")
