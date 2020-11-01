@@ -2,3 +2,7 @@
 net_worth.xlsx
 .idea/
 config.py
+todo.txt
+/graphs
+.DS_Store
+__pycache__/

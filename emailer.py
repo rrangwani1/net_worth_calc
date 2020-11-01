@@ -3,19 +3,6 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import config
 
-'''
-msg = MIMEText(fp.read())
-msg['Subject'] = 'The contents of %s' % textfile
-msg['From'] = me
-msg['To'] = you
-
-# Send the message via our own SMTP server.
-s = smtplib.SMTP('localhost')
-s.send_message(msg)
-s.quit()
-'''
-
-
 
 class Emailer:
 
