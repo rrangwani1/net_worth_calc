@@ -1,7 +1,10 @@
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from email.mime.application import MIMEApplication
+from email.mime.image import MIMEImage
 import config
+from os.path import basename
 
 
 class Emailer:
@@ -18,6 +21,14 @@ class Emailer:
 
         body = MIMEText(config.EMAIL_CONTENTS,'html')
         self.msg.attach(body)
+
+        with open(config.GRAPH_FILE_NAME, "rb") as file:
+            attach_image = MIMEApplication(
+                file.read(),
+                Name = basename(config.GRAPH_FILE_NAME)
+            )
+        attach_image['Content-Disposition'] = 'attachment; filename="%s"' % basename(config.GRAPH_FILE_NAME)
+        self.msg.attach(attach_image)
 
     def send_email(self):
         s = smtplib.SMTP_SSL('smtp.gmail.com', 465)
