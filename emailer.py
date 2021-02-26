@@ -14,12 +14,14 @@ class Emailer:
         self.recipient = config.FROM_EMAIL
         self.msg = MIMEMultipart('alternative')
 
-    def create_email(self):
+    def create_email(self, rating, percent, inc):
         self.msg['Subject'] = config.EMAIL_SUBJECT
         self.msg['From'] = config.FROM_EMAIL
         self.msg['To'] = config.TO_EMAIL
 
-        body = MIMEText(config.EMAIL_CONTENTS,'html')
+        self.contents = config.EMAIL_CONTENTS.format(rating=rating, percent=percent, inc=inc)
+
+        body = MIMEText(self.contents,'html')
         self.msg.attach(body)
 
         with open(config.GRAPH_FILE_NAME, "rb") as file:

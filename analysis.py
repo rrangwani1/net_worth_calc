@@ -19,14 +19,36 @@ class Analysis:
 
     def __init__(self, df):
         self.delta = 0
+        self.delta_string = ""
+        self.delta_percent = 0
+        self.delta_percent_string = ""
+        self.performance = ""
         self.data = df
         self.analysis_dict = dict()
 
-    def value_change(self):
-        print("value change is:{}").format(self.delta)
-        return self.delta
+    def delta_calc(self):
+        self.delta = self.data['Diff from last month'].iloc[-1]
+        self.delta_string = '${:,.2f}'.format(self.delta)
+        self.delta_percent = (self.delta)/self.data['Net Worth'].iloc[-2]
+        self.delta_percent_string = "{:.2%}".format(self.delta_percent)
+        self.delta_percent *= 100
 
-    def make_graph(self):
+        #how to do this in a clever way? like case-switch statements, or one line if statements. something clean, elegant
+        if self.delta_percent < 3:
+            self.performance = "Poor"
+        elif self.delta_percent >= 3 and self.delta_percent < 5:
+            self.performance = "Okay"
+        elif self.delta_percent >= 5 and self.delta_percent < 8:
+            self.performance = "Good"
+        elif self.delta_percent >= 8 and self.delta_percent < 10:
+            self.performance = "Great!"
+        elif self.delta_percent >= 10 and self.delta_percent < 15:
+            self.performance = "Really great!"
+        else:
+            self.performance = "Wow, really really good!!"
+
+
+    def make_line_graph(self):
         Path(config.GRAPH_DIR).mkdir(parents=True, exist_ok=True)
 
         # Format data into lists

@@ -16,10 +16,12 @@ if __name__ == "__main__":
     last_month = utils.last_month_list(df)
 
     analysis = analysis.Analysis(df)
-    analysis.make_graph()
+    analysis.make_line_graph()
+    analysis.delta_calc()
 
     mail = Emailer()
-    mail.create_email()
-    mail.send_email()
+    mail.create_email(analysis.performance, analysis.delta_percent_string, analysis.delta_string)
+    print(mail.contents)
+    #mail.send_email()
 
     print("Report has been created and sent")
