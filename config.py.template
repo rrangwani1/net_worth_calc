@@ -1,0 +1,52 @@
+import os
+import datetime
+
+TO_EMAIL = ""
+FROM_EMAIL = ""
+EMAIL_PASS = ""
+
+TODAYS_DATE = datetime.datetime.now().strftime("%m-%d-%Y")
+
+GRAPH_DIR = os.path.dirname(os.path.realpath(__file__)) + "/graphs/"
+GRAPH_FILE_NAME = GRAPH_DIR + TODAYS_DATE + "-VALUE-CHART.png"
+ASSET_ALLOCATION_NAME = GRAPH_DIR + TODAYS_DATE + "-ASSET-PIE-CHART.png"
+
+
+
+
+EMAIL_SUBJECT = "Your Monthly Net Worth Update!"
+
+EMAIL_CONTENTS = """\
+<html>
+  <head></head>
+  <body>
+    <b> Good afternoon INSERT NAME HERE! </b>
+
+    Here is your <b> monthly net worth </b> update!
+
+    Your performance this month was {rating}
+
+    Your net worth changed by {percent} from last month, with a dollar change of {inc}.
+
+  </body>
+</html>
+"""
+
+
+MONTH_NAMES = {
+    1: "Jan",
+    2: "Feb",
+    3: "Mar",
+    4: "Apr",
+    5: "May",
+    6: "Jun",
+    7: "Jul",
+    8: "Aug",
+    9: "Sept",
+    10: "Oct",
+    11: "Nov",
+    12: "Dec",
+}
+
+
+
